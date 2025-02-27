@@ -18,15 +18,14 @@
     </mat-form-field>
     <button mat-raised-button (click)="onSearch()">Пошук</button>
   
-    <div *ngIf="movies.length > 0" class="movie-list">
-      <div *ngFor="let movie of movies" class="movie-card">
-        <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="{{ movie.title }}" class="movie-image" />
-        <div class="movie-info">
-          <h3>{{ movie.title }}</h3>
-          <p>{{ movie.overview | slice:0:150 }}...</p>
-        </div>
+    <div *ngFor="let movie of movies" class="movie-card">
+      <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="{{ movie.title }}" class="movie-image" />
+      <div class="movie-info">
+        <h3>{{ movie.title }}</h3>
+        <p>{{ movie.overview | slice:0:150 }}...</p>
+        <a [routerLink]="['/movie', movie.id]">Детальніше</a>
       </div>
-    </div>
+    </div>    
   </div>
   
   <div class="movie-slider">
@@ -47,7 +46,7 @@
   
   <footer>
     <div class="container">
-      <p>&copy; 2025 Movie Catalog. Усі права захищені.</p>
+      <p>&copy; 2025 Movie Catalog. Усі права захищені.
+
     </div>
   </footer>
-  

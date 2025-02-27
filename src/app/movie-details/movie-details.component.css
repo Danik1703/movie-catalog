@@ -1,68 +1,150 @@
 .movie-details {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #f3f3f3; 
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-details:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  font-size: 2.4em;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+p {
+  font-size: 1.1em;
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.genres {
+  font-size: 1.1em;
+  color: #777;
+  margin-bottom: 15px;
+}
+
+.rating {
+  font-size: 1.3em;
+  color: #ff9800;
+  display: flex;
+  align-items: center;
+}
+
+.star {
+  color: #ff9800;
+  font-size: 1.8em;
+  margin-right: 5px;
+}
+
+.star.full {
+  color: gold;
+}
+
+.star.half {
+  color: gold;
+}
+
+.star.empty {
+  color: lightgray;
+}
+
+.release-date {
+  font-size: 1.1em;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.poster {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #00796b; 
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #004d40; 
+  transform: translateY(-3px);
+}
+
+button.mat-raised-button.color-warn {
+  background-color: #ff5722;
+}
+
+button.mat-raised-button.color-warn:hover {
+  background-color: #e64a19;
+}
+
+.movie-details div button {
+  background-color: #007bff;
+  color: white;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-transform: none;
+  margin-top: 20px;
+  margin-right: 15px;
+  display: inline-block;
+  cursor: pointer;
+  width: auto;
+}
+
+.movie-details div button:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+  .movie-details {
+    padding: 15px;
   }
-  
+
   h2 {
     font-size: 2em;
-    color: #333;
-    margin-bottom: 15px;
   }
-  
+
   p {
-    font-size: 1.1em;
-    color: #555;
-    line-height: 1.5;
-    margin-bottom: 15px;
+    font-size: 1em;
   }
-  
+
   .rating {
     font-size: 1.2em;
-    color: #ff9800;
   }
-  
+
   .star {
-    color: #ff9800;
     font-size: 1.5em;
-    margin-right: 5px;
   }
-  
-  .star.full {
-    color: gold;
-  }
-  
-  .star.half {
-    color: gold;
-  }
-  
-  .star.empty {
-    color: lightgray;
-  }
-  
-  .release-date {
-    font-size: 1em;
-    color: #666;
-  }
-  
-  .poster {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-top: 20px;
-  }
-  
+
   button {
-    margin-top: 15px;
-    background-color: #333;
-    color: white;
-    font-weight: bold;
+    width: 100%;
+    margin-top: 10px;
   }
-  
-  button.mat-raised-button:hover {
-    background-color: #bbb;
-  }
-  
+}

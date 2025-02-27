@@ -1,24 +1,36 @@
 <div *ngIf="movie" class="movie-details">
-    <h2>{{ movie.title }}</h2>
-    <p>{{ movie.overview }}</p>
-  
-    <p class="rating">
-      <strong>Рейтинг:</strong>
-      <span *ngFor="let star of getStars(movie.vote_average)" class="star">
-        ⭐
-      </span>
-    </p>
-  
-    <p class="release-date">
-      <strong>Дата випуску:</strong> {{ movie.release_date }}
-    </p>
-  
-    <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="Poster" class="poster" />
-  
-    <div *ngIf="movieTrailer">
-      <button mat-raised-button (click)="openTrailer(movieTrailer)">
-        Дивитися трейлер
-      </button>
-    </div>
+  <h2>{{ movie.title }}</h2>
+  <p>{{ movie.overview }}</p>
+
+  <p class="genres" *ngIf="movie.genres?.length">
+    <strong>Жанри:</strong>
+    <span *ngFor="let genre of movie.genres; let last = last">
+      {{ genre.name }}{{ last ? '' : ', ' }}
+    </span>
+  </p>
+
+  <p class="rating">
+    <strong>Рейтинг:</strong>
+    <span *ngFor="let star of getStars(movie.vote_average)" [ngClass]="star">
+      {{ star === 'full' ? '⭐' : star === 'half' ? '✩' : '☆' }}
+    </span>
+  </p>
+
+  <p class="release-date">
+    <strong>Дата випуску:</strong> {{ movie.release_date }}
+  </p>
+
+  <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="Poster" class="poster" />
+
+  <div *ngIf="movieTrailer">
+    <button mat-raised-button (click)="openTrailer()">
+      Дивитися трейлер
+    </button>
   </div>
-  
+
+  <button mat-raised-button (click)="toggleFavorite()">
+    {{ isFavorite ? 'Видалити з обраного' : 'Додати в обране' }}
+  </button>
+
+  <button mat-raised-button color="warn" (click)="goBack()">Назад</button>
+</div>

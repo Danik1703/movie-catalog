@@ -44,8 +44,9 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
   }
 
   viewDetails(movieId: number): void {
-    this.router.navigate(['/movie-details', movieId]);
+    this.router.navigate(['/movie', movieId]);
   }
+  
 
   moveSlide(direction: string): void {
     if (direction === 'next') {
