@@ -8,72 +8,102 @@
 }
 
 .logo {
-  width: 100px; 
+  width: 100px;
   height: auto;
   margin-right: 20px;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .logo:hover {
-  transform: scale(1.1); 
-  filter: brightness(1.2); 
+  transform: scale(1.1);
+  filter: brightness(1.2);
 }
 
 .header h1 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: white;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Playfair Display', serif;
   letter-spacing: 1px;
   margin-left: 10px;
-}
-
-@media (max-width: 600px) {
-  .logo {
-    width: 50px; 
-  }
-
-  .header h1 {
-    font-size: 1.4rem;
-  }
+  text-transform: uppercase;
+  font-weight: 700;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .intro {
-  text-align: left;
-  margin: 50px 0;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin: 50px auto;
+  padding: 40px 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  width: 90%;
+  font-family: 'Roboto', sans-serif;
 }
 
 .intro h2 {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 10px;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .intro p {
-  font-size: 1rem;
-  color: #555;
+  font-size: 1.1rem;
+  color: #7f8c8d;
   margin-top: 0;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.intro p:last-child {
+  font-weight: bold;
+  color: #e74c3c;
+  font-size: 1.3rem;
+}
+
+.intro h2, .intro p {
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .intro {
+    padding: 30px 15px;
+  }
+
+  .intro h2 {
+    font-size: 2rem;
+  }
+
+  .intro p {
+    font-size: 1rem;
+  }
 }
 
 .movie-search {
   display: flex;
-  flex-wrap: wrap; 
-  justify-content: space-between;  
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
-  padding: 30px 20px;
-  background-color: #fafafa;
-  border-radius: 8px;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
+  transition: all 0.3s ease;
 }
 
-mat-form-field {
+.movie-search:hover {
+  transform: translateY(-5px);
+}
+
+.search-field {
   width: 100%;
-  max-width: 500px;
-  margin-right: 10px; 
+  max-width: 350px;
+  margin-right: 20px;
 }
 
 mat-label {
@@ -83,56 +113,37 @@ mat-label {
 
 input {
   padding: 10px;
-  font-size: 1rem;
+  font-size: 1.1rem;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   width: 100%;
 }
 
-button {
-  background-color: #ff5722;
+.search-btn {
+  background-color: #00796b;
   color: white;
   font-weight: bold;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 12px 24px;
+  border-radius: 8px;
   border: none;
-  text-transform: uppercase;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-left: 10px; 
+  font-size: 1rem;
+  text-transform: uppercase;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-button:hover {
-  background-color: #e64a19;
-}
 
-@media (max-width: 600px) {
-  .intro h2 {
-    font-size: 1.6rem;
-  }
-
-  .intro p {
-    font-size: 0.9rem;
-  }
-
-  mat-form-field {
-    max-width: 100%;
-  }
-
-  button {
-    font-size: 0.9rem;
-    padding: 8px 16px;
-  }
-}
 
 .movie-card {
-  background-color: #f5f5f5;
+  background-color: #fff;
   padding: 20px;
-  border-radius: 8px;
-  width: 250px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  width: 280px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
-  flex-shrink: 0; 
+  margin-bottom: 20px;
+  flex-shrink: 0;
 }
 
 .movie-card:hover {
@@ -140,7 +151,7 @@ button:hover {
 }
 
 .movie-info {
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .movie-image {
@@ -148,22 +159,30 @@ button:hover {
   height: 350px;
   object-fit: cover;
   border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.movie-image:hover {
+  transform: scale(1.05);
 }
 
 .movie-info h3 {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   color: #333;
+  font-weight: 600;
+  margin: 10px 0;
 }
 
 .movie-info p {
   font-size: 0.9rem;
-  color: #555;
-  margin-bottom: 10px;
+  color: #777;
+  line-height: 1.5;
+  margin-bottom: 15px;
 }
 
 .movie-info a {
   display: inline-block;
-  padding: 6px 12px;
+  padding: 8px 16px;
   background-color: #00796b;
   color: white;
   border-radius: 5px;
@@ -175,6 +194,23 @@ button:hover {
 
 .movie-info a:hover {
   background-color: #004d40;
+}
+
+@media (max-width: 768px) {
+  .movie-search {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px;
+  }
+
+  .movie-card {
+    width: 100%;
+  }
+
+  .search-btn {
+    width: 100%;
+    margin-top: 10px;
+  }
 }
 
 .slider-container {
@@ -222,31 +258,92 @@ button:hover {
   background-color: #004d40; 
 }
 
+
+.social-icon {
+  font-size: 2rem;
+  color: #00796b;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: rotate(360deg);
+  color: #ff5722;
+}
+
+
 footer {
   background-color: #333;
   color: white;
-  padding: 20px 0;
+  padding: 10px 0;
   text-align: center;
-}
 
-footer a {
-  color: white;
-  text-decoration: none;
-  margin: 0 10px;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-@media (max-width: 600px) {
-  footer p {
-    font-size: 0.8rem;
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 10px;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
-  footer a {
-    font-size: 0.9rem;
-    margin: 0 10px;
+  .footer-logo-img {
+    width: 120px;
+    height: auto;
+  }
+
+  .footer-links,
+  .footer-contact,
+  .footer-social {
+    flex: 1;
+    margin-left: 20px;
+
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+
+      li {
+        margin-bottom: 8px;
+
+        a {
+          color: #bbb;
+          text-decoration: none;
+          transition: color 0.3s;
+
+          &:hover {
+            color: #1abc9c;
+          }
+        }
+      }
+    }
+
+    p {
+      color: #bbb;
+      margin: 8px 0;
+    }
+
+    .social-icon {
+      width: 30px;
+      height: auto;
+      margin-right: 15px;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .footer-bottom {
+    background-color: #222;
+    color: #aaa;
+    padding: 15px;
+    margin-top: 20px;
   }
 }
 

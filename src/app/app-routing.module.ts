@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MovieSearchComponent } from './movie-search/movie-search.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { PlatformHelper } from  '@natec/mef-dev-platform-connector';
 
 const routes: Routes = [
   { path: '', component: MovieSearchComponent },

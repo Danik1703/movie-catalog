@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MovieService } from '../movie.service';
+import { MefDevService } from '../mef-dev.service'; 
 import { Router } from '@angular/router';
+import { PlatformHelper } from '@natec/mef-dev-platform-connector';
 
 @Component({
   selector: 'app-movie-search',
@@ -14,12 +16,18 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
   visibleMovies: any[] = [];
   currentSlide: number = 0;
   slideInterval: any;
+  mefDevData: any[] = []; 
 
-  constructor(private movieService: MovieService, private router: Router) {}
+  constructor(
+    private movieService: MovieService, 
+    private mefDevService: MefDevService, 
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getPopularMovies();
     this.startAutoSlide();
+    this.fetchMefDevData(); 
   }
 
   ngOnDestroy(): void {
@@ -36,6 +44,11 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
     }
   }
 
+  getAsset(url:string): string{
+    return PlatformHelper.getAssetUrl() + url
+  }
+
+
   getPopularMovies(): void {
     this.movieService.getPopularMovies().subscribe((data: any) => {
       this.popularMovies = data.results;
@@ -46,7 +59,6 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
   viewDetails(movieId: number): void {
     this.router.navigate(['/movie', movieId]);
   }
-  
 
   moveSlide(direction: string): void {
     if (direction === 'next') {
@@ -71,5 +83,17 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
     this.slideInterval = setInterval(() => {
       this.moveSlide('next');
     }, 5000);
+  }
+
+  fetchMefDevData(): void {
+    this.mefDevService.getData().subscribe(
+      (data) => {
+        console.log('Данные из MEF.DEV:', data);
+        this.mefDevData = data; 
+      },
+      (error) => {
+        console.error('Ошибка загрузки данных MEF.DEV:', error);
+      }
+    );
   }
 }

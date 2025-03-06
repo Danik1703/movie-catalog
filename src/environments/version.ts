@@ -1,4 +1,4 @@
-{
+export const PLUGIN_VERSION = {
     "dirty": true,
     "raw": "37ab8f0-dirty",
     "hash": "37ab8f0",
@@ -10,4 +10,4 @@
     "name": "movie-catalog",
     "version": "1.1.2",
     "main": "main.js"
-}
+};
