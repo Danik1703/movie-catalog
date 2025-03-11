@@ -48,7 +48,6 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
     return PlatformHelper.getAssetUrl() + url
   }
 
-
   getPopularMovies(): void {
     this.movieService.getPopularMovies().subscribe((data: any) => {
       this.popularMovies = data.results;

@@ -5,10 +5,14 @@ import { AppComponent } from './app.component';
 import { MovieSearchComponent } from './movie-search/movie-search.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 import { MefDevService } from './mef-dev.service';
 
 @NgModule({
@@ -21,10 +25,13 @@ import { MefDevService } from './mef-dev.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule,
+    MatSelectModule,
+    MatProgressSpinnerModule
   ],
   providers: [MefDevService],
   bootstrap: [AppComponent],

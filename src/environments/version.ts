@@ -1,13 +1,13 @@
 export const PLUGIN_VERSION = {
     "dirty": true,
-    "raw": "37ab8f0-dirty",
-    "hash": "37ab8f0",
+    "raw": "7bf7ea0-dirty",
+    "hash": "7bf7ea0",
     "distance": null,
     "tag": null,
     "semver": null,
-    "suffix": "37ab8f0-dirty",
+    "suffix": "7bf7ea0-dirty",
     "semverString": null,
     "name": "movie-catalog",
-    "version": "1.1.2",
+    "version": "1.1.7",
     "main": "main.js"
 };

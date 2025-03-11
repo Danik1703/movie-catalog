@@ -1,5 +1,5 @@
 <div class="header">
-  <img src="assets/logo.png" alt="Logo" class="logo" />
+  <img [src]="getAsset('/logo.png')" alt="Logo" class="logo" />
   <h1>Movie Catalog</h1>
 </div>
 
@@ -9,7 +9,6 @@
   <p>Завітайте на наш сайт і знайдіть фільм, що ідеально підходить для вашого настрою. Рекомендуємо вам ознайомитись із новинками кіноіндустрії, а також з класичними хітами, які стали справжніми культовими фільмами.</p>
   <p>Не зволікайте — почніть перегляд вже зараз!</p>
 </div>
-
 
 <div class="movie-search">
   <mat-form-field appearance="fill" class="search-field">
@@ -28,7 +27,6 @@
   </div>    
 </div>
 
-
 <div class="movie-slider">
   <div class="slider-container" #slider>
       <div *ngFor="let movie of visibleMovies" class="slider-content">
@@ -45,7 +43,6 @@
       <span *ngFor="let dot of visibleMovies; let i = index" class="dot" [class.active]="currentSlide === i" (click)="moveToSlide(i)"></span>
   </div>
 </div>
-
 
 
 <footer>
@@ -69,4 +66,3 @@
     <p>&copy; 2025 Movie Catalog. Усі права захищені.</p>
   </div>
 </footer>
-

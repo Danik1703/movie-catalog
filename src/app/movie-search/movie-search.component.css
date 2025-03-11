@@ -28,6 +28,11 @@
   text-transform: uppercase;
   font-weight: 700;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.header h1:hover {
+  transform: scale(1.05); 
 }
 
 .intro {
@@ -297,20 +302,20 @@ footer {
     flex: 1;
     margin-left: 20px;
 
-    h3 {
+    :is(h3) {
       font-size: 1.2rem;
       margin-bottom: 10px;
       color: #fff;
     }
 
-    ul {
+    :is(ul) {
       list-style-type: none;
       padding: 0;
 
-      li {
+      :is(li) {
         margin-bottom: 8px;
 
-        a {
+        :is(a) {
           color: #bbb;
           text-decoration: none;
           transition: color 0.3s;
@@ -322,7 +327,7 @@ footer {
       }
     }
 
-    p {
+    :is(p) {
       color: #bbb;
       margin: 8px 0;
     }
