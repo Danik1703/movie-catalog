@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MovieService } from '../movie.service';
-import { MefDevService } from '../mef-dev.service'; 
 import { Router } from '@angular/router';
 import { PlatformHelper } from '@natec/mef-dev-platform-connector';
 
@@ -16,18 +15,17 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
   visibleMovies: any[] = [];
   currentSlide: number = 0;
   slideInterval: any;
-  mefDevData: any[] = []; 
+  genres: any[] = [];
+  selectedGenre: string = '';
 
   constructor(
-    private movieService: MovieService, 
-    private mefDevService: MefDevService, 
+    private movieService: MovieService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.getPopularMovies();
     this.startAutoSlide();
-    this.fetchMefDevData(); 
   }
 
   ngOnDestroy(): void {
@@ -44,8 +42,8 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
     }
   }
 
-  getAsset(url:string): string{
-    return PlatformHelper.getAssetUrl() + url
+  getAsset(url: string): string {
+    return PlatformHelper.getAssetUrl() + url;
   }
 
   getPopularMovies(): void {
@@ -55,8 +53,11 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
     });
   }
 
-  viewDetails(movieId: number): void {
-    this.router.navigate(['/movie', movieId]);
+
+
+  updateVisibleMovies(): void {
+    const startIndex = this.currentSlide * 5;
+    this.visibleMovies = this.popularMovies.slice(startIndex, startIndex + 5);
   }
 
   moveSlide(direction: string): void {
@@ -73,26 +74,9 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
     this.updateVisibleMovies();
   }
 
-  updateVisibleMovies(): void {
-    const startIndex = this.currentSlide * 5;
-    this.visibleMovies = this.popularMovies.slice(startIndex, startIndex + 5);
-  }
-
   startAutoSlide(): void {
     this.slideInterval = setInterval(() => {
       this.moveSlide('next');
     }, 5000);
-  }
-
-  fetchMefDevData(): void {
-    this.mefDevService.getData().subscribe(
-      (data) => {
-        console.log('Данные из MEF.DEV:', data);
-        this.mefDevData = data; 
-      },
-      (error) => {
-        console.error('Ошибка загрузки данных MEF.DEV:', error);
-      }
-    );
   }
 }

@@ -29,6 +29,7 @@
   </div>
 
   <button mat-raised-button (click)="toggleFavorite()">
+    <span class="favorite-icon" [class.favorited]="isFavorite">❤️</span>
     {{ isFavorite ? 'Видалити з обраного' : 'Додати в обране' }}
   </button>
 

@@ -30,5 +30,4 @@ export class MovieService {
     const params = new HttpParams().set('api_key', this.apiKey).set('language', 'uk-UA');
     return this.http.get(`${this.apiUrl}/movie/${movieId}/videos`, { params });
   }
-  
 }
