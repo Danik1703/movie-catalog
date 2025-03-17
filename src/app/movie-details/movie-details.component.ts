@@ -12,6 +12,7 @@ export class MovieDetailsComponent implements OnInit {
   movie: any;
   movieTrailer: string | undefined;
   isFavorite: boolean = false;
+  movieCast: any[] = []; 
 
   constructor(
     private route: ActivatedRoute,
@@ -26,15 +27,22 @@ export class MovieDetailsComponent implements OnInit {
         this.movie = data;
         this.checkFavoriteStatus();
       });
-  
+
       this.movieService.getMovieTrailer(+movieId).subscribe((videoData: { results: { type: string; key: string }[] }) => {
         if (videoData.results.length > 0) {
           this.movieTrailer = videoData.results.find((video: { type: string; key: string }) => video.type === 'Trailer')?.key;
         }
       });
+
+      this.getMovieCast(+movieId); 
     }
   }
-  
+
+  getMovieCast(movieId: number): void {
+    this.movieService.getMovieCast(movieId).subscribe((data) => {
+      this.movieCast = data.cast.slice(0, 10); 
+    });
+  }
 
   getStars(rating: number): string[] {
     const stars = [];
@@ -65,7 +73,6 @@ export class MovieDetailsComponent implements OnInit {
     localStorage.setItem('favorites', JSON.stringify(favorites));
     this.checkFavoriteStatus(); 
   }
-  
 
   checkFavoriteStatus(): void {
     const favorites: any[] = JSON.parse(localStorage.getItem('favorites') || '[]');
