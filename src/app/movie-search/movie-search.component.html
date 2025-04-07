@@ -3,9 +3,16 @@
   <h1>Movie Catalog</h1>
 </div>
 
+<div class="tabs">
+  <button class="tab-button" [class.active]="activeTab === 0" (click)="activeTab = 0">
+    Популярні
+  </button>
+  <button class="tab-button" [class.active]="activeTab === 1" (click)="activeTab = 1">
+    Пошук
+  </button>
+</div>
 
-
-<div class="movie-search">
+<div *ngIf="activeTab === 1" class="movie-search">
   <mat-form-field appearance="fill" class="search-field">
     <mat-label>Пошук фільмів</mat-label>
     <input matInput [(ngModel)]="query" />
@@ -21,21 +28,32 @@
     </div>
   </div>    
 </div>
+<div *ngIf="activeTab === 2">
+  <div *ngFor="let movie of filteredMoviesByGenre()" class="movie-card">
+    <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="{{ movie.title }}" class="movie-image" />
+    <div class="movie-info">
+      <h3>{{ movie.title }}</h3>
+      <p>{{ movie.overview | slice: 0:150 }}...</p>
+      <a [routerLink]="['/movie', movie.id]">Детальніше</a>
+    </div>
+  </div>
+</div>
+
 
 <div class="movie-slider">
   <div class="slider-container" #slider>
-      <div *ngFor="let movie of visibleMovies" class="slider-content">
-          <div class="movie-card">
-              <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="{{ movie.title }}" class="movie-image" />
-              <div class="movie-info">
-                  <h3>{{ movie.title }}</h3>
-              </div>
-          </div>
+    <div *ngFor="let movie of visibleMovies" class="slider-content">
+      <div class="movie-card">
+        <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="{{ movie.title }}" class="movie-image" />
+        <div class="movie-info">
+          <h3>{{ movie.title }}</h3>
+        </div>
       </div>
+    </div>
   </div>
 
   <div class="dots">
-      <span *ngFor="let dot of visibleMovies; let i = index" class="dot" [class.active]="currentSlide === i" (click)="moveToSlide(i)"></span>
+    <span *ngFor="let dot of visibleMovies; let i = index" class="dot" [class.active]="currentSlide === i" (click)="moveToSlide(i)"></span>
   </div>
 </div>
 

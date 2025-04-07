@@ -17,14 +17,13 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
   slideInterval: any;
   genres: any[] = [];
   selectedGenre: string = '';
+  activeTab: number = 0;
 
-  constructor(
-    private movieService: MovieService,
-    private router: Router
-  ) {}
+  constructor(private movieService: MovieService, private router: Router) {}
 
   ngOnInit(): void {
     this.getPopularMovies();
+    this.getGenres();
     this.startAutoSlide();
   }
 
@@ -34,16 +33,16 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
     }
   }
 
+  getAsset(url: string): string {
+    return PlatformHelper.getAssetUrl() + url;
+  }
+
   onSearch(): void {
-    if (this.query) {
+    if (this.query.trim()) {
       this.movieService.searchMovies(this.query).subscribe((data) => {
         this.movies = data.results;
       });
     }
-  }
-
-  getAsset(url: string): string {
-    return PlatformHelper.getAssetUrl() + url;
   }
 
   getPopularMovies(): void {
@@ -53,7 +52,25 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
     });
   }
 
+  getGenres(): void {
+    this.movieService.getGenres().subscribe((res) => {
+      this.genres = res.genres;
+    });
+  }
 
+  filteredMovies(): any[] {
+    if (!this.query.trim()) return this.popularMovies;
+    return this.popularMovies.filter((movie) =>
+      movie.title.toLowerCase().includes(this.query.toLowerCase())
+    );
+  }
+
+  filteredMoviesByGenre(): any[] {
+    if (!this.selectedGenre) return this.popularMovies;
+    return this.popularMovies.filter((movie) =>
+      movie.genre_ids.includes(+this.selectedGenre)
+    );
+  }
 
   updateVisibleMovies(): void {
     const startIndex = this.currentSlide * 5;
@@ -61,10 +78,11 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
   }
 
   moveSlide(direction: string): void {
+    const maxSlide = Math.ceil(this.popularMovies.length / 5);
     if (direction === 'next') {
-      this.currentSlide = (this.currentSlide + 1) % Math.ceil(this.popularMovies.length / 5);
+      this.currentSlide = (this.currentSlide + 1) % maxSlide;
     } else if (direction === 'prev') {
-      this.currentSlide = (this.currentSlide - 1 + Math.ceil(this.popularMovies.length / 5)) % Math.ceil(this.popularMovies.length / 5);
+      this.currentSlide = (this.currentSlide - 1 + maxSlide) % maxSlide;
     }
     this.updateVisibleMovies();
   }
@@ -78,5 +96,9 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
     this.slideInterval = setInterval(() => {
       this.moveSlide('next');
     }, 5000);
+  }
+
+  onGenreSelect(): void {
+    this.updateVisibleMovies();
   }
 }

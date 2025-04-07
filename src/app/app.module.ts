@@ -6,6 +6,8 @@ import { MovieSearchComponent } from './movie-search/movie-search.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { MatTabsModule } from '@angular/material/tabs';
+
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -31,7 +33,8 @@ import { MefDevService } from './mef-dev.service';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTabsModule
   ],
   providers: [MefDevService],
   bootstrap: [AppComponent],

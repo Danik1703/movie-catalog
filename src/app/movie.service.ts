@@ -31,6 +31,12 @@ export class MovieService {
     return this.http.get(`${this.apiUrl}/movie/${movieId}/videos`, { params });
   }
 
+  getGenres(): Observable<any> {
+    const params = new HttpParams().set('api_key', this.apiKey).set('language', 'uk-UA');
+    return this.http.get(`${this.apiUrl}/genre/movie/list`, { params });
+  }
+  
+
   getMovieCast(movieId: number): Observable<any> {
     const params = new HttpParams().set('api_key', this.apiKey);
     return this.http.get(`${this.apiUrl}/movie/${movieId}/credits`, { params });
