@@ -88,11 +88,40 @@
   }
 }
 
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.tab-button {
+  background-color: transparent;
+  border: none;
+  padding: 12px 20px;
+  margin: 0 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+  color: #444;
+}
+
+.tab-button:hover {
+  border-bottom: 2px solid #00796b;
+  color: #00796b;
+}
+
+.tab-button.active {
+  border-bottom: 3px solid #00796b;
+  color: #00796b;
+}
+
 .movie-search {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   padding: 30px;
   background-color: #fff;
   border-radius: 12px;
@@ -138,48 +167,33 @@ input {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-
-.tabs {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+.search-btn:hover {
+  background-color: #004d40;
 }
 
-.tab-button {
-  background-color: transparent;
-  border: none;
-  padding: 12px 20px;
-  margin: 0 5px;
-  font-size: 1rem;
-  font-weight: bold;
+.genre-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.genre-item {
+  background-color: #f1f1f1;
+  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: all 0.3s ease;
-  color: #444;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.tab-button:hover {
-  border-bottom: 2px solid #00796b;
-  color: #00796b;
+.genre-item:hover {
+  background-color: #007bff;
+  color: white;
 }
 
-.tab-button.active {
-  border-bottom: 3px solid #00796b;
-  color: #00796b;
-}
-
-
-.movie-search {
-  display: flex;
-  flex-wrap: wrap; 
-  justify-content: space-between; 
-  align-items: flex-start;
-  padding: 30px;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-  gap: 20px; 
+.genre-item.active {
+  background-color: #007bff;
+  color: white;
 }
 
 .movie-card {
@@ -190,6 +204,7 @@ input {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
   flex-shrink: 0; 
+  margin-bottom: 20px;
 }
 
 .movie-card:hover {
@@ -259,6 +274,7 @@ input {
     margin-top: 10px;
   }
 }
+
 
 .slider-container {
   display: flex;

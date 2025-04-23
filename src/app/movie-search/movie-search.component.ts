@@ -9,15 +9,15 @@ import { PlatformHelper } from '@natec/mef-dev-platform-connector';
   styleUrls: ['./movie-search.component.css'],
 })
 export class MovieSearchComponent implements OnInit, OnDestroy {
-  query: string = '';
-  movies: any[] = [];
-  popularMovies: any[] = [];
-  visibleMovies: any[] = [];
-  currentSlide: number = 0;
-  slideInterval: any;
-  genres: any[] = [];
+  query: string = ''; 
+  movies: any[] = []; 
+  popularMovies: any[] = []; 
+  visibleMovies: any[] = []; 
+  currentSlide: number = 0; 
+  slideInterval: any; 
+  genres: any[] = []; 
   selectedGenre: string = '';
-  activeTab: number = 0;
+  activeTab: number = 0; 
 
   constructor(private movieService: MovieService, private router: Router) {}
 
@@ -29,7 +29,7 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.slideInterval) {
-      clearInterval(this.slideInterval);
+      clearInterval(this.slideInterval); 
     }
   }
 
@@ -98,7 +98,8 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
     }, 5000);
   }
 
-  onGenreSelect(): void {
+  onGenreSelect(genreId: string): void {
+    this.selectedGenre = genreId;
     this.updateVisibleMovies();
   }
 }

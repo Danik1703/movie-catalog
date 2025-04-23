@@ -20,24 +20,8 @@
   </button>
 </div>
 
-<div *ngIf="activeTab === 1" class="movie-search">
-  <mat-form-field appearance="fill" class="search-field">
-    <mat-label>Пошук фільмів</mat-label>
-    <input matInput [(ngModel)]="query" />
-  </mat-form-field>
-  <button mat-raised-button class="search-btn" (click)="onSearch()">Пошук</button>
-
-  <div *ngFor="let movie of movies" class="movie-card">
-    <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="{{ movie.title }}" class="movie-image" />
-    <div class="movie-info">
-      <h3>{{ movie.title }}</h3>
-      <p>{{ movie.overview | slice:0:150 }}...</p>
-      <a [routerLink]="['/movie', movie.id]">Детальніше</a>
-    </div>
-  </div>    
-</div>
-<div *ngIf="activeTab === 2">
-  <div *ngFor="let movie of filteredMoviesByGenre()" class="movie-card">
+<div *ngIf="activeTab === 0" class="movie-search">
+  <div *ngFor="let movie of filteredMovies()" class="movie-card">
     <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="{{ movie.title }}" class="movie-image" />
     <div class="movie-info">
       <h3>{{ movie.title }}</h3>
@@ -47,6 +31,34 @@
   </div>
 </div>
 
+<div *ngIf="activeTab === 1" class="movie-search">
+  <mat-form-field appearance="fill" class="search-field">
+    <mat-label>Пошук фільмів</mat-label>
+    <input matInput [(ngModel)]="query" />
+  </mat-form-field>
+
+  <div class="genre-list">
+    <div
+      *ngFor="let genre of genres"
+      class="genre-item"
+      [class.active]="selectedGenre === genre.id"
+      (click)="onGenreSelect(genre.id)"
+    >
+      {{ genre.name }}
+    </div>
+  </div>
+
+  <button mat-raised-button class="search-btn" (click)="onSearch()">Пошук</button>
+
+  <div *ngFor="let movie of filteredMoviesByGenre()" class="movie-card">
+    <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="{{ movie.title }}" class="movie-image" />
+    <div class="movie-info">
+      <h3>{{ movie.title }}</h3>
+      <p>{{ movie.overview | slice: 0:150 }}...</p>
+      <a [routerLink]="['/movie', movie.id]">Детальніше</a>
+    </div>
+  </div>    
+</div>
 
 <div class="movie-slider">
   <div class="slider-container" #slider>
