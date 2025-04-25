@@ -161,14 +161,26 @@ input {
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease-in-out;
   font-size: 1rem;
   text-transform: uppercase;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-left: 20px;
 }
 
 .search-btn:hover {
   background-color: #004d40;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.search-btn:disabled {
+  background-color: #bdbdbd;
+  cursor: not-allowed;
+}
+
+.search-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 121, 107, 0.3);
 }
 
 .genre-list {
@@ -210,6 +222,43 @@ input {
 .movie-card:hover {
   transform: translateY(-5px);
 }
+
+.load-more-container {
+  text-align: center;
+  margin-top: 20px;
+  bottom: 20px;
+  transform: translateX(+300%);
+  z-index: 10;
+}
+
+.load-more-container button {
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #bdbdbd;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 200px;
+}
+
+.load-more-container button:hover {
+  background-color: #bdbdbd;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15);
+}
+
+.load-more-container button:disabled {
+  background-color: #bdbdbd;
+  cursor: not-allowed;
+}
+
+.load-more-container button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(98, 0, 234, 0.3);
+}
+
 
 .movie-info {
   margin-top: 15px;

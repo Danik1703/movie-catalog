@@ -8,6 +8,6 @@ export const PLUGIN_VERSION = {
     "suffix": "7bf7ea0-dirty",
     "semverString": null,
     "name": "movie-catalog",
-    "version": "1.1.8",
+    "version": "1.0.0",
     "main": "main.js"
 };

@@ -5,22 +5,40 @@
 
 <div class="intro">
   <h2>Популярні фільми</h2>
-  <p>Перегляньте найкращі фільми на нашому сайті, що охоплюють різноманітні жанри, від захоплюючих екшнів до емоційних драм. Ми підібрали для вас лише найбільш рейтингові та цікаві фільми, які обов'язково варто побачити. Кожен фільм має свій неповторний сюжет, який допоможе вам поринути у світ кінематографії та отримати незабутні враження.</p>
-  <p>Завітайте на наш сайт і знайдіть фільм, що ідеально підходить для вашого настрою. Рекомендуємо вам ознайомитись із новинками кіноіндустрії, а також з класичними хітами, які стали справжніми культовими фільмами.</p>
+  <p>Перегляньте найкращі фільми на нашому сайті, що охоплюють різноманітні жанри, від захоплюючих екшнів до емоційних драм...</p>
+  <p>Завітайте на наш сайт і знайдіть фільм, що ідеально підходить для вашого настрою...</p>
   <p>Не зволікайте — почніть перегляд вже зараз!</p>
 </div>
 
-
 <div class="tabs">
-  <button class="tab-button" [class.active]="activeTab === 0" (click)="activeTab = 0">
-    Популярні
-  </button>
-  <button class="tab-button" [class.active]="activeTab === 1" (click)="activeTab = 1">
-    Пошук
-  </button>
+  <button class="tab-button" [class.active]="activeTab === 0" (click)="activeTab = 0">Популярні</button>
+  <button class="tab-button" [class.active]="activeTab === 1" (click)="activeTab = 1">Пошук</button>
 </div>
 
-<div *ngIf="activeTab === 0" class="movie-search">
+  <div class="movie-slider">
+    <div class="slider-container" #slider>
+      <div *ngFor="let movie of visibleMovies" class="slider-content">
+        <div class="movie-card">
+          <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="{{ movie.title }}" class="movie-image" />
+          <div class="movie-info">
+            <h3>{{ movie.title }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dots">
+      <span
+        *ngFor="let dot of [].constructor(totalSlides); let i = index"
+        class="dot"
+        [class.active]="currentSlide === i"
+        (click)="moveToSlide(i)">
+      </span>
+    </div>
+
+    <div *ngIf="activeTab === (0)" class="movie-search">
+
+
   <div *ngFor="let movie of filteredMovies()" class="movie-card">
     <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="{{ movie.title }}" class="movie-image" />
     <div class="movie-info">
@@ -31,24 +49,25 @@
   </div>
 </div>
 
-<div *ngIf="activeTab === 1" class="movie-search">
+<div *ngIf="activeTab === (1)" class="movie-search">
   <mat-form-field appearance="fill" class="search-field">
     <mat-label>Пошук фільмів</mat-label>
-    <input matInput [(ngModel)]="query" />
+    <input matInput [(ngModel)]="query" />    
   </mat-form-field>
+
+  <button mat-raised-button class="search-btn" (click)="onSearch()">Пошук</button>
 
   <div class="genre-list">
     <div
       *ngFor="let genre of genres"
       class="genre-item"
       [class.active]="selectedGenre === genre.id"
-      (click)="onGenreSelect(genre.id)"
-    >
+      (click)="onGenreSelect(genre.id)">
       {{ genre.name }}
+      
     </div>
   </div>
 
-  <button mat-raised-button class="search-btn" (click)="onSearch()">Пошук</button>
 
   <div *ngFor="let movie of filteredMoviesByGenre()" class="movie-card">
     <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="{{ movie.title }}" class="movie-image" />
@@ -57,23 +76,12 @@
       <p>{{ movie.overview | slice: 0:150 }}...</p>
       <a [routerLink]="['/movie', movie.id]">Детальніше</a>
     </div>
-  </div>    
-</div>
-
-<div class="movie-slider">
-  <div class="slider-container" #slider>
-    <div *ngFor="let movie of visibleMovies" class="slider-content">
-      <div class="movie-card">
-        <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="{{ movie.title }}" class="movie-image" />
-        <div class="movie-info">
-          <h3>{{ movie.title }}</h3>
-        </div>
-      </div>
-    </div>
   </div>
 
-  <div class="dots">
-    <span *ngFor="let dot of visibleMovies; let i = index" class="dot" [class.active]="currentSlide === i" (click)="moveToSlide(i)"></span>
+  <div class="load-more-container" *ngIf="currentPage < totalPages">
+    <button mat-raised-button color="accent" (click)="loadMoreMovies()" [disabled]="isLoading">
+      {{ isLoading ? 'Завантаження...' : 'Завантажити ще' }}
+    </button>
   </div>
 </div>
 
@@ -82,15 +90,15 @@
     <div class="footer-contact">
       <h3>Контакти</h3>
       <p>Телефон: +1 800 123 456</p>
-      <p>Email: Movie Catalog&#64;gmail.com</p>
+      <p>Email: MovieCatalog&#64;gmail.com</p>
     </div>
     <div class="footer-social">
       <h3>Слідкуйте за нами</h3>
       <a href="https://www.instagram.com/" target="_blank">
-        <img [src]="getAsset('/logo.inst.png')" alt="Instagram" class="social-icon">
+        <img [src]="getAsset('/logo.inst.png')" alt="Instagram" class="social-icon" />
       </a>
       <a href="https://www.facebook.com/" target="_blank">
-        <img [src]="getAsset('/facebook.png')" alt="Facebook" class="social-icon">
+        <img [src]="getAsset('/facebook.png')" alt="Facebook" class="social-icon" />
       </a>
     </div>
   </div>
