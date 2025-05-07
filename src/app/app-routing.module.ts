@@ -4,10 +4,22 @@ import { MovieSearchComponent } from './movie-search/movie-search.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { PlatformHelper } from  '@natec/mef-dev-platform-connector';
 
-const routes: Routes = [
-  { path: '', component: MovieSearchComponent },
-  { path: 'movie/:id', component: MovieDetailsComponent },
-];
+const routes: Routes = PlatformHelper.updatePluginsRoutes([
+  {
+    path: '',
+    children: [
+      {
+        path: '',
+        component: MovieSearchComponent
+      },
+      {
+        path: 'movie/:id',
+        component: MovieDetailsComponent
+      }
+    ]
+  }
+]);
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
