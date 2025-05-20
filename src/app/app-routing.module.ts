@@ -4,7 +4,7 @@ import { MovieSearchComponent } from './movie-search/movie-search.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { PlatformHelper } from  '@natec/mef-dev-platform-connector';
 
-const routes: Routes = PlatformHelper.updatePluginsRoutes([
+const routes: Routes =[
   {
     path: '',
     children: [
@@ -18,7 +18,7 @@ const routes: Routes = PlatformHelper.updatePluginsRoutes([
       }
     ]
   }
-]);
+];
 
 
 @NgModule({
